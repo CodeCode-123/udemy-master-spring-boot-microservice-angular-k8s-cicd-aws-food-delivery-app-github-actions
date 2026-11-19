@@ -13,6 +13,9 @@ jobs:
   build:
 
     runs-on: self-hosted
+    env:
+      # Force npm to store its cache inside the isolated job workspace
+      NPM_CONFIG_CACHE: ${{ github.workspace }}/.npm-cache
 
     steps:
     - name: Clean workspace
