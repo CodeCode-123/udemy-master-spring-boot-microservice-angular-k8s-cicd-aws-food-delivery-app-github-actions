@@ -15,8 +15,15 @@ jobs:
     runs-on: self-hosted
 
     steps:
-    - name: Checkout Repository 
+    - name: Clean workspace
+      if: always()
+      run: find "$GITHUB_WORKSPACE" -mindepth 1 -delete
+    - name: Checkout Repository
       uses: actions/checkout@v6
+      with:
+        persist-credentials: false
+    - name: Remove .git directory
+      run: rm -rf .git
     - name: Setup Node.js
       uses: actions/setup-node@v6
       with:
